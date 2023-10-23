@@ -1,0 +1,19 @@
+Package: Biol4709FinalPackage
+Title: Decomposition
+Version: 0.0.0.9000
+Authors@R: 
+    person("Jenna", "Antonacci", , "first.last@example.com", role = c("aut", "cre"),
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+Description: This package is designed to handle litter bag data from fertilized and non-fertilized plots. It calculates k values, creates matrices of means and standard deviations of different treatments, and analyzes differences between genetic diversity levels.
+License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
+    license
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+Depends: 
+    R (>= 2.10)
+LazyData: true
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

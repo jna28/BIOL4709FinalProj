@@ -1,0 +1,58 @@
+---
+title: "Biol4709FinalPackage_Vignette"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Biol4709FinalPackage_Vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+This package for the BIOL 4709 Final Project handles and analyzes data about decomposition and biomass in salt marsh grasses. It includes three functions: **decomp_k**, **matrix_mean_sd**, and **sep_and_compare**. Here are some guidelines to using this package effectively.
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+**First, load the package.**
+```{r setup}
+library(Biol4709FinalPackage)
+```
+**Now we can use our first function, decomp_k**. 
+
+The decomp_k function is used to calculate the k value of decomposition for each plot in a data set. By inputting a dataset, an numeric value that is the initial mass of each litter bag, the column name of the final masses, and the amount of time (in days) that the plot decomposed, this function creates a new data set that provides the k value for each plot. This function utilizes the equation **k= -ln(finalmass/initialmass)/time**.
+
+**Here is an example of how to use decomp_k with the clean_decomp_data data set.**
+```{r}
+decomp_k(clean_decomp_data, 4.00, "Litter.Bag.f30", 30)
+```
+As you can see, this function outputs a data frame that includes a column of **k** values
+
+**Next, we can use the second function in this package, matrix_mean_sd.**
+
+The matrix_mean_sd function is used to calculate the means and standard deviations of a variable based on fertilization and genetic diversity level. When you input a data set, the name of the column that contains fertilization data, the name of the column that includes genetic diversity data in levels, and the name of the column you want to analyze, this function outputs a comprehensible matrix of means and standard deviations. 
+
+**Here is an example of how to use the matrix_mean_sd function with the clean_decomp_data data set.**
+```{r}
+matrix_mean_sd(clean_decomp_data, "Fertilized.Control", "Genetic.Diversity.Level", "X..remaining30")
+```
+As you can see, this function outputs a matrix of the means and standard deviations of % mass remaining, organized by fertilization level and genetic diversity level.
+
+We can also use the matrix_mean_sd function on the **clean_biomass_data** data set.
+```{r}
+matrix_mean_sd(clean_biomass_data, "Fert", "gd.level..L1.low..L2.medium..L3.high.", "Dry.Weight")
+```
+This outputs the means and standard deviations of the dry weight of the plots, organized by fertilization and genetic diversity level.
+
+**Finally, we can use the third function in this package, sep_and_compare.**
+
+The sep_and_compare function is used to run anova analyses on variables of your choice. To use this function, input a data set, the name of a column that includes fertilization data, then the two names of the columns you want to analyze. Keep in mind that column 2 must contain factor type data, and must have 2+ levels. Column 1 should contain numeric data.
+
+**Here is an example of how to use this function with the clean_biomass_data data set.**
+```{r}
+sep_and_compare(clean_biomass_data, "Fert", "Dry.Weight", "gd.level..L1.low..L2.medium..L3.high.")
+```
+We can see that this function prints the summaries of three anova analyses. The first analyzes the two variables for all plots, the second analyzes only fertilized plots, and the third analyzes only control plots.
+
+With these three functions, we can gain insightful information into the decomposition and biomass of salt marsh plots.
